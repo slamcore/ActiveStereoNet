@@ -1,0 +1,45 @@
+{
+    "mode":"train",
+    "deterministic": false,
+    "gpu_ids": "0",
+    "cpu_threads": "4",
+    "dataset_name": "SLAMcore",
+    "imshow": false,
+    "save": true,
+    "video": false,
+    "lr_invalidation": true,
+    
+    "data": {
+       "data_root": "/data/datasets/d435i",
+       "npy_root": "./Data",
+       "test_split": 0.1,
+       "val_split": 1.0,
+       "crop_size": [832, 480]
+    },
+    
+    "model": {
+        "which_model": "ActiveStereoNet",
+        "max_disp": 144,
+        "scale_factor": 8,
+        "loss": "XTLoss"
+    },
+    
+    "solver": {
+        "batch_size": 1,
+        "accumulate": 16,
+        "refine_head_weight": 0.5,
+        "lcn_weight": 0.5,
+        "cross_entropy_weight": 0.1,
+        "optimizer_type": "RMSProp",
+        "lr_init": 5e-5,
+        "gamma": 0.5,
+        "milestones": [80000, 120000],
+        "eval_steps": 20000,
+        "save_steps": 5000,
+        "max_steps": 150000,
+        "exp_prefix": "Experiments",
+        "save_eval": false,
+        "resume_iter": 40000,
+        "model_name": "slamcore/unsupervised"
+    }
+}
