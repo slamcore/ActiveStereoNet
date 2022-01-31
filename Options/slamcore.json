@@ -25,21 +25,21 @@
     },
     
     "solver": {
-        "batch_size": 1,
-        "accumulate": 16,
-        "refine_head_weight": 0.5,
-        "lcn_weight": 0.5,
-        "cross_entropy_weight": 0.1,
+        "batch_size": 6,
+        "accumulate": 3,
+        "refine_head_weight": 0.75,
+        "lcn_weight": 1.0,
+        "cross_entropy_weight": 0.01,
         "optimizer_type": "RMSProp",
-        "lr_init": 5e-5,
+        "lr_init": 1e-4,
         "gamma": 0.5,
-        "milestones": [80000, 120000],
+        "milestones": [60000, 100000],
         "eval_steps": 20000,
         "save_steps": 5000,
-        "max_steps": 150000,
+        "max_steps": 120000,
         "exp_prefix": "Experiments",
         "save_eval": false,
-        "resume_iter": 40000,
+        "resume_iter": 10000,
         "model_name": "slamcore/unsupervised"
     }
 }

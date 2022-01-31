@@ -10,7 +10,7 @@
     "lr_invalidation": true,
     
     "data": {
-       "data_root": "/media/slamcore/frederik/TartanAirEurocFormat/",
+       "data_root": "/data/datasets/TartanAirEurocFormat/",
        "npy_root": "./Data",
        "test_split": 0.1,
        "val_split": 1.0,
@@ -25,21 +25,21 @@
     },
     
     "solver": {
-        "batch_size": 1,
-        "accumulate": 16,
-        "refine_head_weight": 0.0,
-        "lcn_weight": 0.0,
-        "cross_entropy_weight": 0.1,
+        "batch_size": 6,
+        "accumulate": 3,
+        "refine_head_weight": 0.1,
+        "lcn_weight": 0.5,
+        "cross_entropy_weight": 0.001,
         "optimizer_type": "RMSProp",
         "lr_init": 1e-4,
         "gamma": 0.5,
-        "milestones": [60000, 80000],
+        "milestones": [60000, 100000],
         "eval_steps": 20000,
         "save_steps": 5000,
-        "max_steps": 40000,
+        "max_steps": 10000,
         "exp_prefix": "Experiments",
         "save_eval": false,
         "resume_iter": 0,
-        "model_name": "tartan/unsupervised"
+        "model_name": "tartanair/unsupervised"
     }
 }

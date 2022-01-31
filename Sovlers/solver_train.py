@@ -1,3 +1,26 @@
+"""
+MIT License
+
+Copyright (c) 2022 SLAMcore
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
 import torch
 import os
 import time
@@ -85,7 +108,6 @@ class TrainSolver(object):
             print('[{:d}] Model loaded.'.format(self.global_step))
         
         data_iter = iter(self.train_loader)
-        brk_step = 5000000
         print_info = 1000
         tot_loss = 0.0
         tot_EPE_ref = 0.0
@@ -102,11 +124,6 @@ class TrainSolver(object):
 
             if self.global_step > self.cfg_solver['max_steps']:
                 break
-            
-            brk = False
-            
-            if self.global_step % brk_step == 0:
-                brk = True
 
             sample_wei = sample_weight
             start_time = time.time()
@@ -118,7 +135,7 @@ class TrainSolver(object):
 
             disp_pred_ref_left, disp_pred_coarse_left, disp_pred_ref_right, disp_pred_coarse_right = self.model(imgL, imgR, disp_L, True)
             
-            loss = (refine_weight * self.crit(imgL, imgR, disp_pred_ref_left, disp_pred_ref_right, disp_L, brk, sample_wei)) + ((1 - refine_weight) * self.crit(imgL, imgR, disp_pred_coarse_left, disp_pred_coarse_right, disp_L, False, sample_wei))
+            loss = (refine_weight * self.crit(imgL, imgR, disp_pred_ref_left, disp_pred_ref_right, disp_L, sample_wei)) + ((1 - refine_weight) * self.crit(imgL, imgR, disp_pred_coarse_left, disp_pred_coarse_right, disp_L, sample_wei))
             loss_hist = loss.item()
             tot_loss += loss_hist
             loss /= self.cfg_solver['accumulate']

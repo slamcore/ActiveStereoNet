@@ -1,5 +1,8 @@
 # ActiveStereoNet
-This repository builds upon the open source [Active stereo net implementation](https://github.com/linjc16/ActiveStereoNet) for active tartanair and D435i datsets.
+This repository builds upon the open source pytorch [Active stereo net implementation](https://github.com/linjc16/ActiveStereoNet) and extends it to active tartanair and D435i datsets.
+
+#### Paper
+[ActiveStereoNet: End-to-End Self-Supervised Learning for Active Stereo Systems](https://arxiv.org/pdf/1807.06009.pdf)
 
 ## Requirments
 
@@ -22,11 +25,11 @@ Please, use the links provided to download the datasets and update the ```data_r
 To train on D435i sequences:
 
 ```
-./d435i.sh
+sh d435i.sh
 ```
 
 To train on Active Tartanair sequences:
 
 ```
-./tartanair.sh
+sh tartanair.sh
 ```
